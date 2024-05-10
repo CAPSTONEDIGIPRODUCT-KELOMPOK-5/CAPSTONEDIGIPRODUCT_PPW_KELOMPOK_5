@@ -1,0 +1,1042 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(230, 75%, 56%);
+  --title-color: hsl(230, 75%, 15%);
+  --text-color: hsl(230, 12%, 40%);
+  --body-color: hsl(230, 100%, 98%);
+  --container-color: hsl(230, 100%, 97%);
+  --border-color: hsl(230, 25%, 80%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Poppins', sans-serif;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1023px) {
+  :root {
+    --h2-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.dropdown__item {
+  position: relative; /* Tambahkan properti posisi relatif */
+}
+
+.dropdown__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px; /* Tambahkan lebar yang diinginkan */
+  background-color: var(--container-color);
+  box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+  border-radius: .5rem;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .4s ease-out;
+  padding-left: 0.5rem; /* Tambahkan jarak kiri */
+  text-align: left;
+}
+
+.dropdown__link, 
+.dropdown__sublink {
+  padding: 0.7rem 1rem; /* Tambahkan jarak antara teks */
+  color: var(--white-color);
+  background-color: var(--black-color-light);
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color .3s;
+}
+
+.dropdown__item:hover .dropdown__menu {
+  max-height: 1000px; /* Munculkan menu saat item dropdown dihover */
+}
+
+
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+}
+
+.main__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+}
+
+.search,
+.login {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-modal);
+  background-color: hsla(230, 75%, 15%, .1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); /* For safari */
+  padding: 8rem 1.5rem 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s;
+}
+
+.search__close,
+.login__close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--body-color);
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color .4s;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.nav__search, 
+.nav__login,  
+.nav__close {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+  transition: color .4s;
+}
+
+.nav__toggle {
+  margin-right: 30px;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+  transition: color .4s;
+}
+
+:is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
+  color: var(--first-color);
+}
+
+/* Navigation for mobile devices */
+@media screen and (max-width: 1023px) {
+    .dropdown__menu {
+      position: relative; /* Ganti posisi menjadi relatif */
+      top: auto;
+      left: auto;
+      width: 100%; /* Atur lebar menjadi penuh */
+      max-width: unset; /* Hapus pembatasan lebar maksimum */
+      padding-left: 0; /* Hapus padding kiri */
+      border-radius: 0; /* Hapus radius border */
+      box-shadow: none; /* Hapus bayangan */
+      transition: none; /* Hapus transisi */
+      max-height: none; /* Hapus batas tinggi maksimum */
+      overflow: visible; /* Tampilkan semua konten */
+    }
+  
+    .dropdown__item:hover .dropdown__menu {
+      max-height: unset; /* Hapus batas tinggi maksimum saat dihover */
+    }
+  
+  .nav__menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    background-color: var(--body-color);
+    box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+    width: 100%;
+    padding-block: 4.5rem 4rem;
+    transition: top .4s;
+  }
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+  text-align: center;
+}
+
+.nav__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color .4s;
+}
+
+.nav__close {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.5rem;
+}
+
+/* Show menu */
+.show-menu {
+  top: 0;
+}
+
+/*=============== SEARCH ===============*/
+.search__form {
+  display: flex;
+  
+  
+  column-gap: .5rem;
+  background-color: var(--container-color);
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  padding-inline: 1rem;
+  border-radius: .5rem;
+  transform: translateY(-1rem);
+  transition: transform .4s;
+}
+
+.search__icon {
+  font-size: 1.25rem;
+  color: var(--title-color);
+}
+
+.search__input {
+  width: 100%;
+  padding-block: 1rem;
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
+.search__input::placeholder {
+  color: var(--text-color);
+}
+
+/* Show search */
+.show-search {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.show-search .search__form {
+  transform: translateY(0);
+}
+
+/*=============== LOGIN ===============*/
+.login__form, 
+.login__group {
+  display: grid;
+}
+
+.login__form {
+  background-color: var(--container-color);
+  padding: 2rem 1.5rem 2.5rem;
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  border-radius: 1rem;
+  row-gap: 1.25rem;
+  text-align: center;
+  transform: translateY(-1rem);
+  transition: transform .4s;
+}
+
+.login__title {
+  font-size: var(--h2-font-size);
+  color: var(--title-color);
+}
+
+.login__group {
+  row-gap: 1rem;
+}
+
+.login__label {
+  display: block;
+  text-align: initial;
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  margin-bottom: .25rem;
+}
+
+.login__input {
+  width: 100%;
+  background-color: var(--container-color);
+  border: 2px solid var(--border-color);
+  padding: 1rem;
+  border-radius: .5rem;
+  color: var(--text-color);
+}
+
+.login__input::placeholder {
+  color: var(--text-color);
+}
+
+.login__signup {
+  margin-bottom: .5rem;
+}
+
+.login__signup a {
+  color: var(--first-color);
+}
+
+.login__forgot {
+  display: inline-block;
+  color: var(--first-color);
+  margin-bottom: 1.25rem;
+}
+
+.login__button {
+  display: inline-block;
+  background-color: var(--first-color);
+  width: 100%;
+  color: #fff;
+  font-weight: var(--font-semi-bold);
+  padding: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: box-shadow .4s;
+}
+
+.login__button:hover {
+  box-shadow: 0 4px 24px hsla(230, 75%, 40%, .4);
+}
+
+/* Show login */
+.show-login {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.show-login .login__form {
+  transform: translateY(0);
+}
+
+/* style.css */
+.main__bg {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+}
+
+
+/* INFORMASI */
+.informasi {
+  max-width: 10000px; /* Lebar maksimum konten */
+  margin-top: 20px;
+  text-align: left; /* Teks rata kiri */
+  padding-left: 20px; /* Padding kiri 20px */
+  margin-left: 30px; /* Margin kiri 20px */
+  margin-right: 30px;
+  /* text-align: justify; */
+}
+
+.informasi h1 {
+  margin-top: 20px;
+  margin-bottom: 5px; /* Memberi jarak 10px dari bawah elemen h1 */
+  font-size: 30px; /* Ukuran font h1 */
+  color: black;
+  text-align: center;
+}
+
+.informasi h3 {
+  margin-bottom: 10px; /* Memberi jarak 10px dari bawah elemen h3 */
+  font-size: 18px; /* Ukuran font h3 */
+  color: black;
+  text-align: center;
+}
+
+#map {
+  height: 350px;
+  width: 100%;
+  border: 1px solid #ddd; /* Memberi border 1px solid dengan warna abu-abu */
+  border-radius: 5px; /* Memberi border radius 5px */
+}
+
+.map-container {
+  width: calc(50% - 10px); /* Bagian peta akan menggunakan setengah dari lebar layar dikurangi dengan margin kiri dan kanan */
+  margin-right: 10px; /* Tambahkan jarak antara peta dengan tabel */
+  margin-bottom: 20px; /* Tambahkan jarak bawah agar tidak terlalu dekat dengan tabel */
+  display: inline-block; /* Mengatur box peta agar sejajar dengan box tabel */
+  vertical-align: top; /* Memastikan keduanya sejajar di bagian atas */
+}
+
+/* CSS untuk tabel */
+.table-container {
+  max-width: calc(50% - 10px); /* Mengatur lebar maksimal tabel dikurangi dengan margin kiri dan kanan */
+  width: 100%; /* Biarkan tabel mengambil lebar maksimal */
+  display: inline-block; /* Mengatur box tabel agar sejajar dengan box peta */
+  vertical-align: top; /* Memastikan keduanya sejajar di bagian atas */
+  border-radius: 5px; /* Tambahkan radius sudut */
+  overflow: hidden; /* Memastikan border-radius berfungsi dengan baik */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek lembut */
+}
+
+/* CSS untuk tabel */
+.table-container table {
+  width: 100%; /* Biarkan tabel mengambil lebar maksimal */
+  background-color: #ffffff; /* Warna latar belakang tabel */
+  color: #000000; /* Warna teks dalam tabel */
+  border-collapse: collapse;
+  height: 350px;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: rgba(135, 206, 250, 0.5);
+}
+
+/* Gaya untuk kotak di dalam kolom AQI US */
+td span {
+  display: inline-block;
+  background-color: #FF0000; /* Warna latar belakang kotak */
+  color: #ffffff; /* Warna teks dalam kotak */
+  border-radius: 5px; /* Tambahkan sudut bulat */
+  padding: 5px 10px; /* Tambahkan ruang di dalam kotak */
+}
+
+/* Gaya untuk nilai AQI tertentu */
+td:nth-child(2) span {
+  background-color: #CCCC00; /* Warna latar belakang untuk nilai 77 */
+}
+
+tr:nth-child(2) td:nth-child(2) span {
+  background-color: #CCCC00; /* Warna latar belakang untuk nilai 70 */
+}
+
+tr:nth-child(3) td:nth-child(2) span {
+  background-color: #008000; /* Warna latar belakang untuk nilai 65 */
+}
+
+tr:nth-child(4) td:nth-child(2) span {
+  background-color: #008000; /* Warna latar belakang untuk nilai 68 */
+}
+
+tr:nth-child(5) td:nth-child(2) span {
+  background-color: #008000; /* Warna latar belakang untuk nilai 56 */
+}
+
+
+/* FAKTA */
+.fakta {
+    max-width: 10000px; /* Lebar maksimum konten */
+    margin-top: 20px;
+    text-align: left; /* Teks rata kiri */
+    padding-left: 20px; /* Padding kiri 20px */
+    margin-left: 30px; /* Margin kiri 30px */
+    margin-right: 30px; /* Margin kanan 30px */
+    display: flex; /* Menggunakan tata letak flexbox */
+}
+
+.fakta h1 {
+  color: black;
+}
+
+.fakta p {
+  text-align: justify;
+  color: black;
+}
+
+.content {
+    max-width: calc(50% - 10px);
+    margin-bottom: 5px; /* Jarak 5px dari bawah elemen h1 */
+    font-size: 18px; /* Ukuran font h1 */
+    color: var(--title-color);
+    text-align: justify;
+}
+
+
+.category-table-container {
+    max-width: calc(50% - 10px); /* Mengatur lebar maksimal tabel dikurangi dengan margin kiri dan kanan */
+    margin-left: 17px; /* Tambahkan jarak antara teks dan tabel */
+    margin-right: 6px;
+    border-radius: 5px; /* Tambahkan radius sudut */
+    overflow: hidden; /* Memastikan border-radius berfungsi dengan baik */
+}
+
+.category-table-containers table {
+  margin-left: -7px;
+    width: 100%; /* Biarkan tabel mengambil lebar maksimal */
+    background-color: #ffffff; /* Warna latar belakang tabel */
+    color: #000000; /* Warna teks dalam tabel */
+    border-collapse: collapse;
+    height: 385px;
+}
+
+.category-table-container th,
+.category-table-container td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.category-table-container th {
+    background-color: rgba(135, 206, 250, 0.5);
+}
+
+/* BERITA */
+.berita {
+  max-width: 10000px; /* Lebar maksimum konten */
+  margin-top: 20px;
+  text-align: left; /* Teks rata kiri */
+  padding-left: 20px; /* Padding kiri 20px */
+  margin-left: 30px; /* Margin kiri 30px */
+  margin-right: 30px; /* Margin kanan 30px */
+  display: flex; /* Menggunakan tata letak flexbox */
+}
+
+.news-grid {
+  display: flex; /* Menggunakan tata letak flexbox */
+  flex-wrap: wrap; /* Memungkinkan elemen flex untuk melingkupi baris baru */
+  justify-content: space-between; /* Menyebari elemen flex secara merata di sepanjang container */
+}
+
+.news-box {
+  width: calc(50% - 10px); /* Mengatur lebar setengah dari container dikurangi dengan margin */
+  margin-bottom: 20px; /* Jarak antar box */
+}
+
+.news-image {
+  width: 100%; /* Gambar mengambil lebar maksimal */
+  height: 300px; /* Tinggi gambar disesuaikan agar proporsi terjaga */
+}
+
+.news-box h5 {
+  margin-top: 10px; /* Jarak atas 10px */
+  font-size: 20px; /* Ukuran font h5 */
+  color: #333; /* Warna teks */
+}
+
+.news-box p {
+  font-size: 14px; /* Ukuran font paragraf */
+  color: #666; /* Warna teks */
+  margin-bottom: 10px; /* Jarak bawah 10px */
+}
+
+.news-box a {
+  display: inline-block; /* Mengubah tautan menjadi elemen block */
+  background-color: #007bff; /* Warna latar belakang tautan */
+  color: #fff; /* Warna teks tautan */
+  padding: 8px 16px; /* Padding 8px atas bawah, 16px kiri kanan */
+  text-decoration: none; /* Menghapus dekorasi tautan */
+  border-radius: 4px; /* Sudut bulat */
+  transition: background-color 0.3s ease; /* Transisi perubahan warna latar belakang */
+}
+
+.news-box a:hover {
+  background-color: #0056b3; /* Warna latar belakang saat hover */
+}
+
+
+.solusi {
+  margin-top: 20px;
+  margin-bottom: 70px;
+  text-align: justify; /* Teks rata kiri */
+  padding-left: 20px; /* Padding kiri 20px */
+  margin-left: 30px; /* Margin kiri 30px */
+  margin-right: 20px; /* Margin kanan 20px */
+  display: flex; /* Menggunakan tata letak flexbox */
+  justify-content: flex-start; /* Justifikasi ke kiri */
+  flex-direction: row; /* Memanjangkan konten ke samping */
+}
+
+.solusi h2 {
+  color: black;
+}
+
+.solusi p {
+  color: black;
+}
+
+.solusi li {
+  color: black;
+}
+
+.solution-container {
+  display: flex;
+  align-items: center;
+}
+
+.solution-container img {
+  max-width: 250px;
+  margin-right: 20px;
+}
+
+.solution-content {
+  flex-grow: 1; /* Konten akan memanjang sesuai lebar layar */
+  margin-right: 30px; /* Jarak dari tepi kanan */
+}
+
+.solution-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.solution-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.solution-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.solution-content li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: hsl(230, 75%, 15%);
+}
+
+.animated-box {
+  animation-duration: 1s;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.5rem 5%;
+  background: var(--title-color);
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: white;
+}
+
+/* VISUALISASI */
+.chart-wrapper {
+  margin-top: 120px;
+  display: flex;
+  flex-wrap: wrap; /* Membungkus elemen jika tidak cukup lebar */
+  justify-content: space-around; /* Membuat ruang di sekitar elemen */
+  text-align: justify;
+}
+
+.presentation {
+  width: 100%; /* Memenuhi lebar layar */
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 20px; /* Menambahkan jarak antara elemen */
+}
+
+.chart-container {
+  max-width: 500px;
+  width: 100%; /* Memenuhi lebar layar */
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* VISUALISASI */
+.visualisasi {
+  margin-top: 120px;
+  margin-bottom: 70px;
+  text-align: justify; /* Teks rata kiri */
+  padding-left: 20px; /* Padding kiri 20px */
+  margin-left: 30px; /* Margin kiri 30px */
+  margin-right: 20px; /* Margin kanan 20px */
+  display: flex; /* Menggunakan tata letak flexbox */
+  justify-content: flex-start; /* Justifikasi ke kiri */
+  flex-direction: row; /* Memanjangkan konten ke samping */
+}
+
+.visualisasi1 {
+  margin-top: -50px;
+  margin-bottom: 10px;
+  text-align: justify; /* Teks rata kiri */
+  padding-left: 20px; /* Padding kiri 20px */
+  margin-left: 30px; /* Margin kiri 30px */
+  margin-right: 20px; /* Margin kanan 20px */
+  display: flex; /* Menggunakan tata letak flexbox */
+  justify-content: flex-start; /* Justifikasi ke kiri */
+  flex-direction: row; /* Memanjangkan konten ke samping */
+}
+
+.visualisasi-container {
+  display: flex;
+  align-items: center;
+}
+
+.visualisasi-container img {
+  max-width: 500px;
+  margin-right: 20px;
+}
+
+.visualisasi-content {
+  flex-grow: 1; /* Konten akan memanjang sesuai lebar layar */
+  margin-right: 30px; /* Jarak dari tepi kanan */
+}
+
+.visualisasi-content h2 {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.visualisasi-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.visualisasi-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  color: hsl(230, 75%, 15%);
+}
+
+.visualisasi-content li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: hsl(230, 75%, 15%);
+}
+
+.visualisasi .animated-box {
+  animation-duration: 1s;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+
+
+/* CSS */
+/* FORM */
+.form {
+  max-width: 700px; /* Lebar maksimum form */
+  margin: 120px auto; /* Posisi tengah form */
+  padding: 20px; /* Padding pada form */
+  background-color: #ffff; /* Warna latar belakang form */
+  border-radius: 10px; /* Radius sudut form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form h2 {
+  text-align: center; /* Posisi teks ke tengah */
+  color: hsl(230, 75%, 15%);
+}
+
+.form label {
+  font-weight: bold; /* Teks label tebal */
+  color: hsl(230, 75%, 15%);
+}
+
+.form input[type="text"],
+.form input[type="tel"],
+.form textarea,
+.form input[type="file"],
+.form input[type="submit"] {
+  width: 100%; /* Lebar input form */
+  padding: 10px; /* Padding pada input form */
+  margin-bottom: 15px; /* Jarak antar input form */
+  border: 1px solid #ccc; /* Garis tepi input form */
+  border-radius: 5px; /* Radius sudut input form */
+}
+
+.form textarea {
+  resize: vertical; /* Memperbolehkan textarea diresize secara vertikal */
+}
+
+.form input[type="submit"] {
+  background-color: #007bff; /* Warna latar belakang tombol submit */
+  color: white; /* Warna teks tombol submit */
+  cursor: pointer; /* Mengubah kursor menjadi tanda pointer saat dihover */
+  transition: background-color 0.3s; /* Transisi saat hover */
+}
+
+.form input[type="submit"]:hover {
+  background-color: #007bff; /* Warna latar belakang tombol submit saat dihover */
+}
+
+.notification-bar {
+  background-color: #4CAF50; /* Warna hijau */
+  color: white;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: none; /* Mulai tersembunyi */
+  transition: top 0.5s; /* Efek transisi */
+}
+
+/* Tombol Tutup */
+.close-button {
+  color: white;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.close-button:hover {
+  cursor: pointer;
+}
+
+.polutan {
+  max-width: 1150px; /* Lebar maksimum form */
+  margin: 20px auto; /* Posisi tengah form */
+  padding: 20px; /* Padding pada form */
+  background-color: #f9f9f9; /* Warna latar belakang form */
+  border-radius: 10px; /* Radius sudut form */
+  background-color: #ffff; /* Warna latar belakang form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.polutan h2 {
+  font-size: 24px;
+  text-align: center;
+  color: hsl(230, 75%, 15%);
+}
+
+.polutan th,
+.polutan td {
+  text-align: justify;
+  color:black;
+}
+
+/* CSS untuk tabel */
+.data {
+  max-width: 1000px; /* Lebar maksimum form */
+  margin: 120px auto; /* Posisi tengah form */
+  padding: 20px; /* Padding pada form */
+  background-color: #f9f9f9; /* Warna latar belakang form */
+  border-radius: 10px; /* Radius sudut form */
+  background-color: #ffff; /* Warna latar belakang form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS untuk tabel data */
+.data table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data h2 {
+  text-align: center;
+  color: hsl(230, 75%, 15%);
+}
+
+.data table th,
+.data table td {
+  padding: 6px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  color: hsl(230, 75%, 15%);
+}
+
+.data table th {
+  background-color: rgba(135, 206, 250, 0.5);
+}
+
+
+/* CSS untuk tabel */
+.field-researcher {
+  max-width: 1000px; /* Lebar maksimum form */
+  margin: 120px auto; /* Posisi tengah form */
+  padding: 20px; /* Padding pada form */
+  background-color: #ffff; /* Warna latar belakang form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Radius sudut form */
+}
+
+/* CSS untuk tabel data */
+.field-researcher table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.field-researcher h2{
+  text-align: center;
+  color: hsl(230, 75%, 15%);
+}
+
+.field-researcher table th,
+.field-researcher table td {
+  padding: 6px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  color: hsl(230, 75%, 15%);
+}
+
+.field-researcher table th {
+  background-color: rgba(135, 206, 250, 0.5);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .search,
+  .login {
+    padding-top: 10rem;
+  }
+
+  .search__form {
+    max-width: 450px;
+    margin-inline: auto;
+  }
+
+  .search__close,
+  .login__close {
+    width: max-content;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    font-size: 2rem;
+  }
+
+  .login__form {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1023px) {
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    column-gap: 3rem;
+  }
+  .nav__close, 
+  .nav__toggle {
+    display: none;
+  }
+  .nav__menu {
+    margin-left: auto;
+  }
+  .nav__list {
+    flex-direction: row;
+    column-gap: 3rem;
+  }
+
+  .login__form {
+    padding: 3rem 2rem 3.5rem;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .container {
+    margin-inline: auto;
+  }
+}

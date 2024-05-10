@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: hsl(230, 100%, 98%);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.box {
+    background: #fdfdfd;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
+}
+
+.form-box {
+    width: 450px;
+    margin: 10px;
+}
+
+.form-box header {
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+}
+
+.form-box form .field {
+    margin-bottom: 10px;
+}
+
+.form-box form .input input {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.btn {
+    height: 35px;
+    background: #007bff;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.btn:hover {
+    opacity: 0.82;
+}
+
+.links {
+    margin-bottom: 15px;
+}
+
+/* Home */
+
+.nav {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #000;
+}
+
+.right-links a {
+    padding: 0 10px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.main-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-box .top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.message {
+    text-align: center;
+    background: #f9eded;
+    padding: 15px 0;
+    border: 1px solid #699053;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.container1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.box.form-box1 {
+    background-color: #fff;
+    padding: 40px; /* Sesuaikan padding dengan kebutuhan */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 900px; /* Sesuaikan lebar kotak dengan kebutuhan */
+    max-width: 100%; /* Agar kotak tidak melebihi lebar layar */
+}
+
+.input label {
+    margin-bottom: 10px; /* Atur jarak antara label dan input */
+    display: block; /* Agar label berada di atas input */
+}
+
+.input input[type="text"],
+.input input[type="date"],
+.input input[type="tel"],
+.input select {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 10px; /* Atur jarak antara input */
+}
+
+.input input[type="submit"] {
+    cursor: pointer;
+    background-color: #1b1b1b;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.input input[type="submit"]:hover {
+    opacity: 0.82;
+}
+
+.input .radio-options,
+.input .select-options {
+    margin-bottom: 10px;
+}
+
+.input .radio-options label,
+.input .select-options label {
+    margin-right: 20px; /* Atur jarak antara radio buttons atau option */
+    display: inline-block; /* Agar radio buttons atau option berada dalam satu baris */
+}
+
+/* CSS untuk Form Tambah Data Peneliti */
+.form {
+    max-width: 600px; /* Lebar maksimum form */
+    margin: 50px auto; /* Posisi form di tengah dan memberikan margin atas 50px */
+    padding: 20px; /* Padding form */
+    border: 1px solid #ccc; /* Garis tepi form */
+    border-radius: 5px; /* Tambahkan radius sudut pada form */
+    background-color: #f9f9f9; /* Warna latar belakang form */
+  }
+  
+  .form h2 {
+    text-align: center; /* Posisi teks judul form menjadi di tengah */
+  }
+  
+  .form label {
+    display: block; /* Membuat label menjadi block element */
+    margin-top: 10px; /* Tambahkan margin atas pada label */
+  }
+  
+  .form input[type="text"],
+  .form textarea {
+    width: calc(100% - 22px); /* Lebar input dan textarea menjadi 100% dengan mengurangi padding */
+    padding: 10px; /* Padding input dan textarea */
+    margin: 5px 0 15px; /* Tambahkan margin pada input dan textarea */
+    border: 1px solid #ccc; /* Garis tepi input dan textarea */
+    border-radius: 4px; /* Tambahkan radius sudut pada input dan textarea */
+    box-sizing: border-box; /* Sesuaikan box model */
+  }
+  
+  .form button[type="submit"],
+  .form button[type="button"] {
+    background-color: #4CAF50; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    padding: 12px 20px; /* Padding tombol */
+    border: none; /* Hapus border tombol */
+    border-radius: 4px; /* Tambahkan radius sudut pada tombol */
+    cursor: pointer; /* Ubah kursor saat dihover menjadi pointer */
+    display: block; /* Membuat tombol menjadi block element */
+    margin: 15px auto 0; /* Mengatur margin atas dan bawah serta posisi menjadi di tengah */
+  }
+  
+  .form button[type="submit"]:hover,
+  .form button[type="button"]:hover {
+    background-color: #45a049; /* Warna latar belakang tombol saat dihover */
+  }
+  
